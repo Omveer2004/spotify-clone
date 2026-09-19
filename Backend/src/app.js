@@ -6,7 +6,14 @@ const musicRoutes = require('./routes/music.routes');
 
 const app = express();
 app.use(cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps, curl, Postman)
+        // or any localhost or vercel domain
+        if (!origin || origin.includes("localhost") || origin.endsWith(".vercel.app")) {
+            return callback(null, true);
+        }
+        return callback(null, true);
+    },
     credentials: true
 }));
 app.use(express.json());

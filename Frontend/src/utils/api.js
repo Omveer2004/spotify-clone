@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api',
-  withCredentials: true, // Send cookies
+  baseURL: import.meta.env.VITE_BACKEND_URL || 'https://spotify-clone-e31s.onrender.com/api',
+  withCredentials: true,
 });
 
 // Automatically inject JWT from localStorage if present
